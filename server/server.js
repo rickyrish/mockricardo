@@ -14,7 +14,7 @@ const app = express();
 
 
 const publicPath = path.resolve(__dirname, '../public');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.use(express.static(publicPath));
 
@@ -25,30 +25,29 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/spotify/:client_id/:client_secret', (req, resp) => {
+app.post('/generatoken', (req, resp) => {
+	console.log(req.body);
+	let client_id = "868b1a78-24b5-4bcc-865a-f8389956cb7f";
+	let client_secret = "663ce94d-7836-4514-bf8b-97237eb8bf9c";
+    let spotifyurl = 'https://negocio-dev.cla.pe/generatoken';
 
-    let client_id = req.params.client_id;
-    let client_secret = req.params.client_secret;
-    let spotifyUrl = 'https://accounts.spotify.com/api/token';
-
-    var authOptions = {
-        url: spotifyUrl,
-        headers: {
-            Authorization: 'Basic ' + new Buffer(client_id + ':' + client_secret).toString('base64')
-        },
-        form: {
-            grant_type: 'client_credentials'
-        },
-        json: true
+    var authoptions = {
+        url: spotifyurl,
+        headers: {},
+        json: {
+            client_id: client_id, client_secret: client_secret
+        }
     };
+	
+	console.log(authoptions);
 
 
-    request.post(authOptions, (err, httpResponse, body) => {
+    request.post(authoptions, (err, httpresponse, body) => {
 
         if (err) {
             return resp.status(400).json({
                 ok: false,
-                mensaje: 'No se pudo obtener el token',
+                mensaje: 'no se pudo obtener el token',
                 err
             })
         }
