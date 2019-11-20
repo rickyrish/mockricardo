@@ -6,6 +6,8 @@
 
 */
 
+const recibos = require('./recibos');
+
 const express = require('express');
 const request = require('request');
 const path = require('path');
@@ -91,6 +93,13 @@ app.post('/validarRespuestas', (req, resp) => {
       mensajeRespuesta: 'Respuesta Incorrecta'
     });
   }
+});
+
+
+app.post('/obtenerRecibos', (req, resp) => {
+  var respuesta = recibos.listaRecibos();
+  console.log(recibos);
+  resp.json(respuesta);
 });
 
 app.listen(port, err => {
