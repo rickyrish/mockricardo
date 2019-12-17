@@ -60,7 +60,9 @@ app.post('/generatoken', (req, resp) => {
 app.post('/obtenerPreguntas', (req, resp) => {
   var info = req.body;
   // console.log(info);
-  var respuesta = MessageResponse: { Body:{
+  var respuesta = { 
+      MessageResponse: {
+          Body:{
     idTransaccion: '231341',
     codigoRespuesta: '0',
     mensajeRespuesta: 'correcto',
@@ -73,7 +75,9 @@ app.post('/obtenerPreguntas', (req, resp) => {
       { preguntas: '¿Cual es el nombre de tu papá?' },
       { preguntas: '¿Cual es tu lugar de nacimiento?' }
     ]
-  }};
+  }
+      }
+                  };
   resp.json(respuesta);
 });
 
