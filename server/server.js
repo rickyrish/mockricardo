@@ -82,12 +82,13 @@ app.post('/obtenerPreguntas', (req, resp) => {
 });
 
 app.post('/validarRespuestas', (req, resp) => {
-  var info = req.MessageRequest.Body;
+  var info = req.body.MessageRequest.Body;
   var respuesta = info.respuestValor;
+  var idTransaccion = info.idTransaccion
   if (respuesta === 'Jorge') {
     resp.json({ MessageResponse: {
-        Body: {
-      idTransaccion: '231341',
+      Body: {
+      idTransaccion: idTransaccion,
       codigoRespuesta: 0,
       mensajeRespuesta: 'Respuesta Correcta' 
         }
@@ -96,8 +97,8 @@ app.post('/validarRespuestas', (req, resp) => {
   } else {
     resp.json(
         { MessageResponse: {
-        Body: {
-      idTransaccion: '231341',
+          Body: {
+      idTransaccion: idTransaccion,
       codigoRespuesta: 1,
       mensajeRespuesta: 'Respuesta Incorrecta'
     }
