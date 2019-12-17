@@ -85,10 +85,13 @@ app.post('/validarRespuestas', (req, resp) => {
   var info = req.body;
   var respuesta = info.respuestValor;
   if (respuesta === 'Jorge') {
-    resp.json({
+    resp.json({ MessageResponse: {
+        Body: {
       idTransaccion: '231341',
       codigoRespuesta: 0,
-      mensajeRespuesta: 'Respuesta Correcta'
+      mensajeRespuesta: 'Respuesta Correcta' 
+        }
+    }
     });
   } else {
     resp.json({
