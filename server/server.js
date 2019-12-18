@@ -7,6 +7,7 @@
 */
 
 const recibos = require('./recibos');
+const validaServicio = require('./mocks/validaServicios');
 
 const express = require('express');
 const request = require('request');
@@ -111,6 +112,11 @@ app.post('/validarRespuestas', (req, resp) => {
 app.post('/obtenerRecibos', (req, resp) => {
   var respuesta = recibos.listaRecibos();
   console.log(recibos);
+  resp.json(respuesta);
+});
+
+app.post('/validaServicio', (req, resp) => {
+  var respuesta = validaServicio.validarServicio();
   resp.json(respuesta);
 });
 
