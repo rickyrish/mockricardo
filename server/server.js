@@ -30,9 +30,9 @@ app.use(function(req, res, next) {
 
 app.post('/generatoken', (req, resp) => {
   console.log(req.body);
-  let client_id = '868b1a78-24b5-4bcc-865a-f8389956cb7f';
-  let client_secret = '663ce94d-7836-4514-bf8b-97237eb8bf9c';
-  let spotifyurl = 'https://negocio-dev.cla.pe/generatoken';
+  let client_id = '62a3a397-185f-494a-a095-7133d5389293';
+  let client_secret = '250f573b-0cf3-4df2-bb3f-b6e5c2612f75';
+  let spotifyurl = 'https://negocio.cla.pe/generatoken';
 
   var authoptions = {
     url: spotifyurl,
