@@ -13,7 +13,7 @@ app.use(express.static(publicPath));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With,  Accept"); // Content-Type,
+    res.header("Access-Control-Allow-Headers", "Content-Type, Origin, X-Requested-With,  Accept");
     next();
 });
 
