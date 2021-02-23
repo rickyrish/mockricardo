@@ -42,7 +42,7 @@ app.post('/validar/cliente', async (req, res) => {
     }
 
     const respuesta = {
-        serialVersionUID: 123123,
+        serialVersionUID: 7675675232,
         hiddenContext: {  nombre },
         openContext:{ nombre},
         visibleContext: { nombre},
@@ -64,7 +64,7 @@ app.post('/validar/cliente/getname', (req,res) => {
     mensaje = mensaje.replace('[nombre]', nombre);
 
     const response = { 
-        serialVersionUID: 1231231232,
+        serialVersionUID: 76865634353,
         answer: {
           template: 'TEXT_OPTIONS',
           content: {
