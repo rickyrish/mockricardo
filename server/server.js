@@ -33,7 +33,7 @@ app.post('/validar/cliente', async (req, res) => {
     let option = 'ES_CLIENTE';
 
     const responseService = await validaClienteProvider('1', dni);
-
+    console.log(responseService);
     if(responseService.codigoRespuesta === '0') {
         option = 'ES_CLIENTE';
         nombre = responseService.listDatosDocumentoClienteResponse[0].descripcion;
@@ -48,6 +48,7 @@ app.post('/validar/cliente', async (req, res) => {
         visibleContext: { nombre},
         option
       };
+      console.log(respuesta);
       res.send(respuesta);
 });
 

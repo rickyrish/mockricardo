@@ -23,7 +23,6 @@ const validaClienteProvider = async (tipoDoc, nroDoc,) => {
     },});
 
     const json = await result.json();
-    console.log(json);
 
     await removerToke(token);
 
