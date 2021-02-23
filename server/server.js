@@ -55,7 +55,7 @@ app.post('/validar/cliente', async (req, res) => {
 app.post('/validar/cliente/getname', (req,res) => {
     console.log('valida cliente getname');
     console.log(req.body);
-    const {answer, hiddenContext } = req.body;
+    const {answer, hiddenContext, text, code, info, entities, intents, openContext, visibleContext } = req.body;
 
 
     let mensaje =  answer.content.content;
@@ -74,9 +74,15 @@ app.post('/validar/cliente/getname', (req,res) => {
             content: mensaje
           }
         },
-        
-        
-        text: 'Si eres un cliente'};
+        text,
+        code,
+        info,
+        entities,
+        intents,
+        hiddenContext,
+        openContext,
+        visibleContext
+    };
     console.log(response);
     res.send( response);
 
