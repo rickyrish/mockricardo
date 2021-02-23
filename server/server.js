@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { generarToken } = require('../providers/auth');
-const { validaClienteProvider } = require('../providers/claroProvider');
+const { validaClienteProvider, validarUsuarioProv } = require('../providers/claroProvider');
 
 const app = express();
 
