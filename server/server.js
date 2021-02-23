@@ -92,6 +92,12 @@ app.post('/validar/cliente/getname', (req,res) => {
 
 })
 
+app.post('/guardar/reclamo', (req,res) => {
+    let {body} = req;
+
+    body.hiddenContext = {...body.hiddenContext, nroReclamo: body.visibleContext.NRO_RECLAMO }
+    res.send(body);
+});
 
 app.post('/validar/reclamo', (req,res) => {
     console.log('api /validar/reclamo');
@@ -105,8 +111,8 @@ app.post('/validar/reclamo', (req,res) => {
         visibleContext: { },
         option: 'OK'
       };
-
-      res.send(respuesta);
+      console.log('===========================')
+      return res.send(respuesta);
 })
 
 app.listen(port, (err) => {
