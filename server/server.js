@@ -143,16 +143,16 @@ app.post('/consulta/expediente', async (req,res) => {
     const loginUsuario = hiddenContext.loginUsuario;
 
     const resultServicio = await consultaExpediente(loginUsuario, nroReclamo);
-
+    console.log(resultServicio);
     let content = `Su reclamo ${nroReclamo} esta en estado ${ resultServicio.estado}
             tiene un plazo de atención de ${ resultServicio.plazoAtencion} y un plazo
             de notificación de ${ resultServicio.plazoNotif } 
     `;
-    let quejas= '';
-    if(resultServicio.listaQuejas.length > 0) {
-        quejas = resultServicio.listaQueja.join(', ');
-        content = content + quejas;
-    }
+    // let quejas= '';
+    // if(resultServicio.listaQuejas.length > 0) {
+    //     quejas = resultServicio.listaQueja.join(', ');
+    //     content = content + quejas;
+    // }
 
     body.answer.content.content = content;
 
