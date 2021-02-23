@@ -25,7 +25,7 @@ app.post('/validar/cliente', async (req, res) => {
     const dni = req.body.entities.find( e => e.name === 'CARDINAL').value + '';
     const forDni = req.body.entities.find( e => e.name === 'FORMATO_DNI').position;
 
-    console.log(forDni);
+    console.log( 'position dni',forDni);
     if(!dni) {
         return res.status(400).send({ option: 'NO_ES_CLIENTE'});
     }
@@ -46,7 +46,7 @@ app.post('/validar/cliente', async (req, res) => {
 
     const respuesta = {
         serialVersionUID: 7675675232,
-        hiddenContext: {  nombre },
+        hiddenContext: {  nombre, dni },
         openContext:{ nombre},
         visibleContext: { nombre},
         option
