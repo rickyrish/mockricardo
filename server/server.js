@@ -54,6 +54,7 @@ app.post('/validar/cliente', async (req, res) => {
 
 app.post('/validar/cliente/getname', (req,res) => {
     console.log('valida cliente getname');
+    console.log(req.body);
     const {answer, hiddenContext } = req.body;
 
 
@@ -62,7 +63,7 @@ app.post('/validar/cliente/getname', (req,res) => {
 
     mensaje = mensaje.replace('[nombre]', nombre);
 
-    res.send( { 
+    const response = { 
         serialVersionUID: 1231231232,
         answer: {
           template: 'TEXT_OPTIONS',
@@ -75,7 +76,9 @@ app.post('/validar/cliente/getname', (req,res) => {
         },
         
         
-        text: 'Si eres un cliente'});
+        text: 'Si eres un cliente'};
+    console.log(response);
+    res.send( response);
 
 
 })
