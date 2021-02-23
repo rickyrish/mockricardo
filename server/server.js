@@ -43,7 +43,7 @@ app.post('/validar/cliente', async (req, res) => {
 
     const respuesta = {
         serialVersionUID: 123123,
-        hiddenContext: {  nombre, dni},
+        hiddenContext: {  nombre },
         openContext:{ nombre},
         visibleContext: { nombre},
         option
