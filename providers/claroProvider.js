@@ -1,6 +1,7 @@
 const { generarToken, removerToke } = require("./auth")
 const fetch = require('node-fetch');
 const ValidaClienteReq = require("../models/validaCliente");
+const UsuarioReq = require("../models/usuarios");
 
 const headersClaro = {
     'idTransaccion': '20210222174149427',
@@ -26,8 +27,24 @@ const validaClienteProvider = async (tipoDoc, nroDoc,) => {
 
     await removerToke(token);
 
-    return json.MessageResponse.Body.listDatosDocumentoClienteResponse[0].descripcion;
+    return json.MessageResponse.Body;
 
 }
 
-module.exports = { validaClienteProvider }
+const validarUsuarioProv =  async(tipodoc, nroDoc, nroQueja, password)  => {
+    const token = await generarToken();
+    const url = 'https://clientes-dev.cla.pe/api/v1/gestionreclamos/usuarios';
+    const body = new UsuarioReq(tipodoc, nroDoc, nroQueja, password);
+    const result = await fetch(url, { method: 'POST', 
+    body: body.getRequestJson(), 
+    headers: { 'Content-Type': 'application/json',
+                'access_token': token,
+                ...headersClaro
+    },});
+
+    const json = await result.json();
+
+    return json.MessageResponse.Body;
+}
+
+module.exports = { validaClienteProvider, validarUsuarioProv }

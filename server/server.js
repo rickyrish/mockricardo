@@ -28,15 +28,22 @@ app.post('/validar/cliente', async (req, res) => {
     }
 
 
-
+    let nombre = '';
 
     let option = 'ES_CLIENTE';
 
-    let nombre = await validaClienteProvider('1', dni);
+    const responseService = await validaClienteProvider('1', dni);
+
+    if(responseService.codigoRespuesta === '0') {
+        option = 'ES_CLIENTE';
+        nombre = responseService.listDatosDocumentoClienteResponse[0].descripcion;
+    } else {
+        option = 'NO_ES_CLIENTE';
+    }
 
     const respuesta = {
         serialVersionUID: 123123,
-        hiddenContext: {  nombre},
+        hiddenContext: {  nombre, dni},
         openContext:{ nombre},
         visibleContext: { nombre},
         option
@@ -70,6 +77,22 @@ app.post('/validar/cliente/getname', (req,res) => {
         text: 'Si eres un cliente'});
 
 
+})
+
+
+app.post('/validar/reclamo', (req,res) => {
+    console.log(req.body);
+
+
+    const respuesta = {
+        serialVersionUID: 123123,
+        hiddenContext: {  },
+        openContext:{ },
+        visibleContext: { },
+        option: 'OK'
+      };
+
+      res.send(respuesta);
 })
 
 app.listen(port, (err) => {
