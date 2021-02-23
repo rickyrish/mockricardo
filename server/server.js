@@ -99,21 +99,49 @@ app.post('/guardar/reclamo', (req,res) => {
     res.send(body);
 });
 
-app.post('/validar/reclamo', (req,res) => {
+app.post('/validar/reclamo', async (req,res) => {
     console.log('api /validar/reclamo');
-    console.log(req.body);
+    const { hiddenContext, visibleContext } = req.body
+    const tipoDoc  = '1';
+    const dni = hiddenContext.dni;
+    const reclamo = hiddenContext.nroReclamo;
+    const password = visibleContext.password;
+
+    const resultServicio = await validarUsuarioProv(tipoDoc,dni, reclamo, password);
+    let option = 'NO_OK';
+
+    if(resultServicio.codigoRespuesta === '0') {
+        console.log(resultServicio);
+        option = 'OK';
+        const respuesta = {
+            serialVersionUID: 123123,
+            hiddenContext: { ...hiddenContext, loginUsuario: resultServicio.loginUsuario  },
+            openContext:{ },
+            visibleContext: {...visibleContext },
+            option
+          };
+          return res.send(respuesta); 
+    } else {
+        const respuesta = {
+            serialVersionUID: 123123,
+            hiddenContext: {  },
+            openContext:{ },
+            visibleContext: { },
+            option: 'NO_OK'
+          };
+          console.log('===========================')
+          return res.send(respuesta); 
+    }
+});
 
 
-    const respuesta = {
-        serialVersionUID: 123123,
-        hiddenContext: {  },
-        openContext:{ },
-        visibleContext: { },
-        option: 'OK'
-      };
-      console.log('===========================')
-      return res.send(respuesta);
-})
+app.post('/consulta/expediente', (req,res) => {
+    let {body} = req;
+    console.log('====== consulta expediente ======');
+    res.send(body);
+});
+
+
 
 app.listen(port, (err) => {
 
