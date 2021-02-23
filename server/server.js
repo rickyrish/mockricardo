@@ -44,7 +44,7 @@ app.post('/validar/cliente', async (req, res) => {
       res.send(respuesta);
 });
 
-app.post('validar/cliente/getname', (req,res) => {
+app.post('/validar/cliente/getname', (req,res) => {
 
     const {answer, hiddenContext } = req.body;
 
@@ -68,7 +68,7 @@ app.post('validar/cliente/getname', (req,res) => {
         
         
         text: 'Si eres un cliente'});
-    });
+
 
 })
 
