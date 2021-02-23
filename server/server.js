@@ -148,11 +148,19 @@ app.post('/consulta/expediente', async (req,res) => {
             tiene un plazo de atención de ${ resultServicio.plazoAtencion} y un plazo
             de notificación de ${ resultServicio.plazoNotif } 
     `;
-    // let quejas= '';
-    // if(resultServicio.listaQuejas.length > 0) {
-    //     quejas = resultServicio.listaQueja.join(', ');
-    //     content = content + quejas;
-    // }
+    let quejas= '';
+    console.log(resultServicio.listaQuejas);
+    if(resultServicio.listaQuejas.length > 0) {
+        console.log(resultServicio.listaQuejas);
+        quejas = resultServicio.listaQuejas.map(p => {
+            let queja = p.nroQueja + '';
+            if(queja.length === 2) {
+                queja = `${nroReclamo}${queja}`;
+            }
+            return queja
+        }).join(', ');
+        content = content + quejas;
+    }
 
     body.answer.content.content = content;
 

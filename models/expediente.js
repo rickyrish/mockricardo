@@ -31,7 +31,7 @@ class ExpedienteReq {
                   }
                },
                "Body":{
-                  "nroReclaQueja": this.loginUsuario,
+                  "nroReclaQueja": this.nroReclaQueja,
                   "loginUsuario": this.loginUsuario,
                   "loginOsiptel":null
                }
