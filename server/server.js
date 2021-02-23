@@ -53,7 +53,7 @@ app.post('/validar/cliente', async (req, res) => {
 });
 
 app.post('/validar/cliente/getname', (req,res) => {
-
+    console.log('valida cliente getname');
     const {answer, hiddenContext } = req.body;
 
 
