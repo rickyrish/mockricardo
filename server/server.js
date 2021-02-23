@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { generarToken } = require('../providers/auth');
-const { validaClienteProvider, validarUsuarioProv } = require('../providers/claroProvider');
+const { validaClienteProvider, validarUsuarioProv, consultaExpediente } = require('../providers/claroProvider');
 
 const app = express();
 
@@ -135,10 +135,27 @@ app.post('/validar/reclamo', async (req,res) => {
 });
 
 
-app.post('/consulta/expediente', (req,res) => {
+app.post('/consulta/expediente', async (req,res) => {
     let {body} = req;
     console.log('====== consulta expediente ======');
-    console.log(JSON.stringify(body));
+    const { hiddenContext} = body;
+    const nroReclamo = hiddenContext.nroReclamo;
+    const loginUsuario = hiddenContext.loginUsuario;
+
+    const resultServicio = await consultaExpediente(loginUsuario, nroReclamo);
+
+    let content = `Su reclamo ${nroReclamo} esta en estado ${ resultServicio.estado}
+            tiene un plazo de atención de ${ resultServicio.plazoAtencion} y un plazo
+            de notificación de ${ resultServicio.plazoNotif } 
+    `;
+    let quejas= '';
+    if(resultServicio.listaQuejas.length > 0) {
+        quejas = resultServicio.listaQueja.join(', ');
+        content = content + quejas;
+    }
+
+    body.answer.content.content = content;
+
     res.send(body);
 });
 
