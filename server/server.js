@@ -138,6 +138,7 @@ app.post('/validar/reclamo', async (req,res) => {
 app.post('/consulta/expediente', (req,res) => {
     let {body} = req;
     console.log('====== consulta expediente ======');
+    console.log(JSON.stringify(body));
     res.send(body);
 });
 
