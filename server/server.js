@@ -23,6 +23,9 @@ app.use(function(req, res, next) {
 
 app.post('/validar/cliente', async (req, res) => {
     const dni = req.body.entities.find( e => e.name === 'CARDINAL').value + '';
+    const forDni = req.body.entities.find( e => e.name === 'FORMATO_DNI').position;
+
+    console.log(forDni);
     if(!dni) {
         return res.status(400).send({ option: 'NO_ES_CLIENTE'});
     }
@@ -91,6 +94,7 @@ app.post('/validar/cliente/getname', (req,res) => {
 
 
 app.post('/validar/reclamo', (req,res) => {
+    console.log('api /validar/reclamo');
     console.log(req.body);
 
 
