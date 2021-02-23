@@ -44,6 +44,34 @@ app.post('/validar/cliente', async (req, res) => {
       res.send(respuesta);
 });
 
+app.post('validar/cliente/getname', (req,res) => {
+
+    const {answer, hiddenContext } = req.body;
+
+
+    let mensaje =  answer.content.content;
+    let nombre = hiddenContext.nombre;
+
+    mensaje = mensaje.replace('[nombre]', nombre);
+
+    res.send( { 
+        serialVersionUID: 1231231232,
+        answer: {
+          template: 'TEXT_OPTIONS',
+          content: {
+            buttons: [],
+            type: 'TEXT_OPTIONS',
+            description: '',
+            content: mensaje
+          }
+        },
+        
+        
+        text: 'Si eres un cliente'});
+    });
+
+})
+
 app.listen(port, (err) => {
 
     if (err) throw new Error(err);
