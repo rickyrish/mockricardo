@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { generarToken } = require('../providers/auth');
 const { validaClienteProvider, validarUsuarioProv, consultaExpediente } = require('../providers/claroProvider');
+const fetch = require('node-fetch');
 
 const app = express();
 
@@ -165,6 +166,39 @@ app.post('/consulta/expediente', async (req,res) => {
     body.answer.content.content = content;
 
     res.send(body);
+});
+
+
+app.post('/conversations/',  async (req, res) => {
+    const { session } = req.params;
+    let {body, headers} = req;
+
+    const url = 'http://52.184.198.151:8082/conversations/' + session;
+
+    const service = await fetch(url, {  method: 'POST', 
+    body: JSON.stringify(body),
+    headers
+});
+
+    const datos = await service.json();
+
+    res.json(datos);
+});
+
+app.post('/conversations/:session',  async (req, res) => {
+    const { session } = req.params;
+    let {body, headers} = req;
+
+    const url = 'http://52.184.198.151:8082/conversations/' + session;
+
+    const service = await fetch(url, {  method: 'POST', 
+    body: JSON.stringify(body),
+    headers
+});
+
+    const datos = await service.json();
+
+    res.json(datos);
 });
 
 
