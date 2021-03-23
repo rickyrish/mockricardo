@@ -147,9 +147,7 @@ app.post('/consulta/expediente', async (req,res) => {
 
     const resultServicio = await consultaExpediente(loginUsuario, nroReclamo);
     console.log(resultServicio);
-    let content = `Su reclamo ${nroReclamo} esta en estado ${ resultServicio.estado}
-            tiene un plazo de atención de ${ resultServicio.plazoAtencion} y un plazo
-            de notificación de ${ resultServicio.plazoNotif } 
+    let content = `Su reclamo ${nroReclamo} esta en estado ${ resultServicio.estado} tiene un plazo de atención de ${ resultServicio.plazoAtencion} días y un plazo de notificación de ${ resultServicio.plazoNotif } días
     `;
     let quejas= '';
     console.log(resultServicio.listaQuejas);
@@ -162,7 +160,7 @@ app.post('/consulta/expediente', async (req,res) => {
             }
             return queja
         }).join(', ');
-        content = content + quejas;
+        content = content + 'tus quejas son: \n' + quejas;
     }
 
     body.answer.content.content = content;
